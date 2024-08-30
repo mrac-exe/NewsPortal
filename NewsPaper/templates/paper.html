@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Paper
+{% endblock title %}
+
+{% block content %}
+<h1>Новостной портал "Новости на сегодня"</h1>
+<hr>
+ <b><h2> {{paper.title}} </h2></b>
+
+<ins><h4> {{paper.text|censor}} </h4></ins>
+<sub><h5>Опубликовано: {{ paper.date_post|date:'d.m.y' }}</h5></sub>
+{% endblock content %}

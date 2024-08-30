@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+{% for cat in paper.category.all %}
+    <u>{{ cat.name }}</u>
+        {% if request.user in cat.subscribers.all %}
+        <a class="btn btn-secondary" href="{% url 'unsubscribe' cat.id %}">Отписаться</a>
+        {% else %}
+        <a class="btn btn-secondary" href="{% url 'subscribe' cat.id %}">Подписаться</a>
+        {% endif %}
+        {% endfor %}
+<h1>Заголовок: {{ paper.heading }}</h1>
+<h1>Автор: {{  paper.author.user }}</h1>
+<h1>Дата публикации: {{ paper.time_in }}</h1>
+<h1>Новость: {{ paper.text }}</h1>
+{% endblock content %}

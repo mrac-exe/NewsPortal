@@ -1,0 +1,62 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+<h1>Новостной портал "Новости на сегодня"</h1>
+<hr>
+<a href="/news/search" class="btn btn-success btn-fill" target="_blank">Поиск по новостям</a>
+<hr>
+<h3> Всего новостей: {{ page_obj.paginator.count }} </h3>
+{% if news %}
+<table>
+    <tr>
+        <td>Заголовок</td>
+        <td>Дата публикации</td>
+        <td>Превью</td>
+        <td>Категории</td>
+    </tr>
+    {% for post in news %}
+    <tr>
+        <td> {{ post.title|censor}} </td>
+        <td> {{ post.date_post|date:'d.m.y' }} </td>
+        <td> {{ post.text|censor|truncatechars:20 }} </td>
+        <td>
+            {% for category in post.category.all %}
+                <a href="{% url 'category_list' category.id %}">{{ category }}</a>
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h2>Пока никаких новостей нет, но скоро здесь будет интересно!</h2>
+{% endif %}
+
+{# Информация о предыдущих страницах #}
+{% if page_obj.has_previous %}
+   <a href="?page=1">1</a>
+   {% if page_obj.previous_page_number != 1 %}
+       ...
+       <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+   {% endif %}
+{% endif %}
+
+{# Информация о текущей странице #}
+{{ page_obj.number }}
+
+{# Информация о следующих страницах #}
+{% if page_obj.has_next %}
+   <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+   {% if paginator.num_pages != page_obj.next_page_number %}
+       ...
+       <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+   {% endif %}
+{% endif %}
+
+{% endblock content %}
+

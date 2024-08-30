@@ -1,0 +1,9 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+    <h1 class="text-center"> {{ message }} {{ category }}</h1>
+{% if is_not_subscriber %}
+    <p class="text-center"><a href="{% url 'post_list' %}" class="btn btn-secondary byn-sn">Вернуться</a></p>
+{% endif %}
+
+{% endblock %}
