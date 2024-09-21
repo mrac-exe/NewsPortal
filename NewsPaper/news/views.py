@@ -10,8 +10,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
-
-
 class PostList(LoginRequiredMixin,ListView):
     model = Post
     ordering = ('date_post')
