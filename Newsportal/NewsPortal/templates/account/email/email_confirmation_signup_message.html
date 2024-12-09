@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% load account %} <!-- Загружаем тег, который позволит получить нам ссылку на подтверждение -->
+    <h1>Приветствуем вас, {{ user.username }}!</h1>
+    <h3>Благодарим за регистрацию на новостном портале "С мира по нитке". Для завершения регистрации пройдите по следующей ссылке:
+        <a href="{{ activate_url }}">Тыц</a> </h3>
+     <!-- Вставляем ссылку на активацию -->
+</body>
+</html>
